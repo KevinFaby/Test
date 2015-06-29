@@ -1,0 +1,12 @@
+extends layout	
+
+block content
+	div.container(style="padding-top: 70px;")
+		div.row
+		
+			h3(class="muted") Demo Node.js
+			hr
+			div(class="jumbotron")
+				h1 Merci #{nom} pour votre message.
+				if (typeof(pg_name) !== "undefined")
+					p #{pg_name.Nom} -> #{pg_name.ID}

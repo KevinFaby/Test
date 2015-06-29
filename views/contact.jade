@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	div.container(style="padding-top: 70px;")
+		div.row
+			h3(class="muted") Demo Node.js
+			hr
+			div(class="jumbotron")
+				h1 Demo NodeJs
+				form(action="postcontact",method='post')
+					select(id='sel', name='sel')
+						option(value='*') *
+						option(value='ID') ID
+						option(value='Nom') Nom
+					input(id='nom', name='nom', type='text',value='',placeholder='Votre nom')
+					input(type='submit', value='Valider')

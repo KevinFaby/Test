@@ -10,6 +10,20 @@ var users = require('./routes/users');
 
 var app = express();
 
+var res_pg;
+// function
+	var test = function() {
+		pg.connect(constring, function(err, client, done){
+			client.query('SELECT * FROM \"Monstre\" WHERE "ID" = 2', function(err, result) {
+				res_pg = result.rows[0];
+			});
+		});
+	};
+
+// connection postgreSQL
+
+var pg = require('pg');
+var constring = "postgres://postgres:NHLsurvivor@localhost:5432/postgres";
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +39,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+// Request
+app.post('/postcontact', function(req, res) {
+	var name = req.body.nom;
+	// Requete PostgreSQL
+	console.log(req.body.sel);
+	var req_sql = 'SELECT ' + req.body.sel + ' FROM \"Monstre\" WHERE "ID" = 2'
+	test();
+	res.render('postcontact', {nom: name, pg_name: res_pg});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
